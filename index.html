@@ -1,0 +1,651 @@
+<html>
+<title>Am Charts</title>	
+<head>
+	<script src="js/angular.min.js"></script>
+	<script src="js/amcharts.js"></script>
+	<script src="js/serial.js"></script>
+	<script src="js/pie.js"></script>
+	<script src="js/light.js"></script>
+	<script src="js/am-charts-directives.js"></script>
+	<link href="css/style.css" rel="styleSheet" type="text/css">
+</head>
+
+<body ng-app="charts">      
+
+<div ng-controller="ChartsCtrl">
+	<column-chart title="columnChart.title" position="columnChart.position" data="columnChart.data" xaxis="columnChart.xAxis" yaxis="columnChart.yAxis"></column-chart>
+
+	<layered-column-chart title="layeredColumnChart.title" position="layeredColumnChart.position" data="layeredColumnChart.data" xaxis="layeredColumnChart.xAxis" yfirst="layeredColumnChart.yaxisFirst" ysecond="layeredColumnChart.yaxisSecond"></layered-column-chart>
+
+	<stacked-column-chart title="stackedColumnChart.title" position="stackedColumnChart.position" data="stackedColumnChart.data" xaxis="stackedColumnChart.xAxis" yfirst="stackedColumnChart.yaxisFirst" ysecond="stackedColumnChart.yaxisSecond"></stacked-column-chart >
+
+	<!-- <clustered-column-chart title="clusteredColumnChart.title" position="clusteredColumnChart.position" data="clusteredColumnChart.data" xaxis="clusteredColumnChart.xAxis" yfirst="clusteredColumnChart.yaxisFirst" ysecond="clusteredColumnChart.yaxisSecond"></clustered-column-chart> -->
+
+	<line-chart position="lineChart.position" data="lineChart.data"></line-chart>
+	<threed-pie-chart title="threedPieChart.title" data="threedPieChart.data"></threed-pie-chart>
+
+	<pie-chart-with-legend title="pieChartWithLegend.title" data="pieChartWithLegend.data" position="pieChartWithLegend.position"></pie-chart-with-legend>
+
+	<three-donut-chart title="threeDonutChart.title" data="threeDonutChart.data" titlefield="threeDonutChart.titlefield" valuefield="threeDonutChart.valuefield"></three-donut-chart>
+
+	<pie-chart-broken-slices title="pieChartBrokenSlices.title" data="pieChartBrokenSlices.data"></pie-chart-broken-slices>
+	
+	<smoothed-line-chart position="smoothedLineChart.position" data="smoothedLineChart.data" categoryfield="smoothedLineChart.categoryfield" valuefield="smoothedLineChart.valuefield"></smoothed-line-chart>
+	
+	<line-with-changing-color title="lineWithChangingColor.title" data="lineWithChangingColor.data" categoryfield="lineWithChangingColor.categoryfield" valuefield="lineWithChangingColor.valuefield" linecolor="lineWithChangingColor.linecolor"></line-with-changing-color>
+
+</div>
+
+<script type="text/javascript">
+
+//Angular App Module and Controller
+angular.module('charts', ['amCharts'])
+.controller('ChartsCtrl', function ($scope) {
+	$scope.columnChart = {
+		xAxis	 : 'country',
+		yAxis	 : 'visits',
+		title    : 'Visitors from country',
+		position : 'left',
+		data  	 : [{
+				    "country": "USA",	
+				    "visits": 3025,
+				    "color": "#FF0F00"
+				  }, {
+				    "country": "China",
+				    "visits": 1882,
+				    "color": "#FF6600"
+				  }, {
+				    "country": "Japan",
+				    "visits": 1809,
+				    "color": "#FF9E01"
+				  }, {
+				    "country": "Germany",
+				    "visits": 1322,
+				    "color": "#FCD202"
+				  }, {
+				    "country": "UK",
+				    "visits": 1122,
+				    "color": "#F8FF01"
+				  }, {
+				    "country": "France",
+				    "visits": 1114,
+				    "color": "#B0DE09"
+				  }, {
+				    "country": "India",
+				    "visits": 984,
+				    "color": "#04D215"
+				  }, {
+				    "country": "Spain",
+				    "visits": 711,
+				    "color": "#0D8ECF"
+				  }, {
+				    "country": "Netherlands",
+				    "visits": 665,
+				    "color": "#0D52D1"
+				  }, {
+				    "country": "Russia",
+				    "visits": 580,
+				    "color": "#2A0CD0"
+				  }, {
+				    "country": "South Korea",
+				    "visits": 443,
+				    "color": "#8A0CCF"
+				  }, {
+				    "country": "Canada",
+				    "visits": 441,
+				    "color": "#CD0D74"
+				  }]
+	}
+
+	$scope.layeredColumnChart = {
+		xAxis	 	: 'country',
+		yaxisFirst	: 'year2004',
+		yaxisSecond	: 'year2005',
+		title    	: 'GDP growth rate',
+		position 	: 'left',
+		data  	 	: [{
+					        "country": "USA",
+					        "year2004": 3.5,
+					        "year2005": 4.2
+					    }, {
+					        "country": "UK",
+					        "year2004": 1.7,
+					        "year2005": 3.1
+					    }, {
+					        "country": "Canada",
+					        "year2004": 2.8,
+					        "year2005": 2.9
+					    }, {
+					        "country": "Japan",
+					        "year2004": 2.6,
+					        "year2005": 2.3
+					    }, {
+					        "country": "France",
+					        "year2004": 1.4,
+					        "year2005": 2.1
+					    }, {
+					        "country": "Brazil",
+					        "year2004": 2.6,
+					        "year2005": 4.9
+					    }]
+	}
+
+	$scope.stackedColumnChart = {
+		xAxis	 	: 'country',
+		yaxisFirst	: 'year2004',
+		yaxisSecond	: 'year2005',
+		title    	: 'GDP growth rate',
+		position 	: 'left',
+		data  	 	: [{
+					        "country": "USA",
+					        "year2004": 3.5,
+					        "year2005": 4.2
+					    }, {
+					        "country": "UK",
+					        "year2004": 1.7,
+					        "year2005": 3.1
+					    }, {
+					        "country": "Canada",
+					        "year2004": 2.8,
+					        "year2005": 2.9
+					    }, {
+					        "country": "Japan",
+					        "year2004": 2.6,
+					        "year2005": 2.3
+					    }, {
+					        "country": "France",
+					        "year2004": 1.4,
+					        "year2005": 2.1
+					    }, {
+					        "country": "Brazil",
+					        "year2004": 2.6,
+					        "year2005": 4.9
+					    }, {
+					        "country": "Russia",
+					        "year2004": 6.4,
+					        "year2005": 7.2
+					    }, {
+					        "country": "India",
+					        "year2004": 8,
+					        "year2005": 7.1
+					    }, {
+					        "country": "China",
+					        "year2004": 9.9,
+					        "year2005": 10.1
+					    }]
+	}
+
+	$scope.clusteredColumnChart = {
+		xAxis	 	: 'country',
+		yaxisFirst	: 'year2004',
+		yaxisSecond	: 'year2005',
+		title    	: 'GDP growth rate',
+		position 	: 'left',
+		data  	 	: [{
+					        "country": "USA",
+					        "year2004": 3.5,
+					        "year2005": 4.2
+					    }, {
+					        "country": "UK",
+					        "year2004": 1.7,
+					        "year2005": 3.1
+					    }, {
+					        "country": "Canada",
+					        "year2004": 2.8,
+					        "year2005": 2.9
+					    }, {
+					        "country": "Japan",
+					        "year2004": 2.6,
+					        "year2005": 2.3
+					    }, {
+					        "country": "France",
+					        "year2004": 1.4,
+					        "year2005": 2.1
+					    }, {
+					        "country": "Brazil",
+					        "year2004": 2.6,
+					        "year2005": 4.9
+					    }, {
+					        "country": "Russia",
+					        "year2004": 6.4,
+					        "year2005": 7.2
+					    }, {
+					        "country": "India",
+					        "year2004": 8,
+					        "year2005": 7.1
+					    }, {
+					        "country": "China",
+					        "year2004": 9.9,
+					        "year2005": 10.1
+					    }]
+	}
+
+	$scope.lineChart = {
+		position 	: 'left',
+		data  	 	: [{
+					        "date": "2009-10-02",
+					        "value": 5
+					    }, {
+					        "date": "2009-10-03",
+					        "value": 15
+					    }, {
+					        "date": "2009-10-04",
+					        "value": 13
+					    }, {
+					        "date": "2009-10-05",
+					        "value": 17
+					    }, {
+					        "date": "2009-10-06",
+					        "value": 15
+					    }, {
+					        "date": "2009-10-09",
+					        "value": 19
+					    }, {
+					        "date": "2009-10-10",
+					        "value": 21
+					    }, {
+					        "date": "2009-10-11",
+					        "value": 20
+					    }, {
+					        "date": "2009-10-12",
+					        "value": 20
+					    }, {
+					        "date": "2009-10-13",
+					        "value": 19
+					    }, {
+					        "date": "2009-10-16",
+					        "value": 25
+					    }, {
+					        "date": "2009-10-17",
+					        "value": 24
+					    }, {
+					        "date": "2009-10-18",
+					        "value": 26
+					    }, {
+					        "date": "2009-10-19",
+					        "value": 27
+					    }, {
+					        "date": "2009-10-20",
+					        "value": 25
+					    }, {
+					        "date": "2009-10-23",
+					        "value": 29
+					    }, {
+					        "date": "2009-10-24",
+					        "value": 28
+					    }, {
+					        "date": "2009-10-25",
+					        "value": 30
+					    }, {
+					        "date": "2009-10-26",
+					        "value": 72,
+					        "customBullet": "https://www.amcharts.com/lib/3/images/redstar.png"
+					    }, {
+					        "date": "2009-10-27",
+					        "value": 43
+					    }, {
+					        "date": "2009-10-30",
+					        "value": 31
+					    }, {
+					        "date": "2009-11-01",
+					        "value": 30
+					    }, {
+					        "date": "2009-11-02",
+					        "value": 29
+					    }, {
+					        "date": "2009-11-03",
+					        "value": 27
+					    }, {
+					        "date": "2009-11-04",
+					        "value": 26
+					    }]
+	}
+
+	$scope.threedPieChart = {
+		title 		: 'country',
+		data  	 	: [ {
+						    "country": "Lithuania",
+						    "value": 260
+						  }, {
+						    "country": "Ireland",
+						    "value": 201
+						  }, {
+						    "country": "Germany",
+						    "value": 65
+						  }, {
+						    "country": "Australia",
+						    "value": 39
+						  }, {
+						    "country": "UK",
+						    "value": 19
+						  }, {
+						    "country": "Latvia",
+						    "value": 10
+						  } ]
+	}
+
+	$scope.pieChartWithLegend = {
+		title 		: 'country',
+		position 	: 'right',
+		data  	 	: [{
+					    "country": "Lithuania",
+					    "litres": 501.9
+					  }, {
+					    "country": "Czech Republic",
+					    "litres": 301.9
+					  }, {
+					    "country": "Ireland",
+					    "litres": 201.1
+					  }, {
+					    "country": "Germany",
+					    "litres": 165.8
+					  }, {
+					    "country": "Australia",
+					    "litres": 139.9
+					  }, {
+					    "country": "Austria",
+					    "litres": 128.3
+					  }, {
+					    "country": "UK",
+					    "litres": 99
+					  }, {
+					    "country": "Belgium",
+					    "litres": 60
+					  }, {
+					    "country": "The Netherlands",
+					    "litres": 50
+					  }]
+	}
+
+	$scope.threeDonutChart = {
+		title 		: 'Three Donut Chart',
+		titlefield 	: 'country',
+		valuefield 	: 'visits',
+		data  	 	: [ {
+					    "country": "United States",
+					    "visits": 7252
+					  }, {
+					    "country": "China",
+					    "visits": 3882
+					  }, {
+					    "country": "Japan",
+					    "visits": 1809
+					  }, {
+					    "country": "Germany",
+					    "visits": 1322
+					  }, {
+					    "country": "United Kingdom",
+					    "visits": 1122
+					  }, {
+					    "country": "France",
+					    "visits": 414
+					  }, {
+					    "country": "India",
+					    "visits": 384
+					  }, {
+					    "country": "Spain",
+					    "visits": 211
+					  } ]
+	}
+
+	$scope.pieChartBrokenSlices = {
+		title 		: 'Pie Chart Broken Slices',
+		data  	 	: [{
+						  type: "Fossil Energy",
+						  percent: 70,
+						  color: "#ff9e01",
+						  subs: [{
+						    type: "Oil",
+						    percent: 15
+						  }, {
+						    type: "Coal",
+						    percent: 35
+						  }, {
+						    type: "Nuclear",
+						    percent: 20
+						  }]
+						}, {
+						  type: "Green Energy",
+						  percent: 30,
+						  color: "#b0de09",
+						  subs: [{
+						    type: "Hydro",
+						    percent: 15
+						  }, {
+						    type: "Wind",
+						    percent: 10
+						  }, {
+						    type: "Other",
+						    percent: 5
+						  }]
+						}]
+	}
+
+	$scope.smoothedLineChart = {
+		position 	: 'left',
+		valuefield  : 'value',
+		categoryfield : 'year',
+		data  	 	: [{
+					        "year": "1950",
+					        "value": -0.307
+					    }, {
+					        "year": "1951",
+					        "value": -0.168
+					    }, {
+					        "year": "1952",
+					        "value": -0.073
+					    }, {
+					        "year": "1953",
+					        "value": -0.027
+					    }, {
+					        "year": "1954",
+					        "value": -0.251
+					    }, {
+					        "year": "1955",
+					        "value": -0.281
+					    }, {
+					        "year": "1956",
+					        "value": -0.348
+					    }, {
+					        "year": "1957",
+					        "value": -0.074
+					    }, {
+					        "year": "1958",
+					        "value": -0.011
+					    }, {
+					        "year": "1959",
+					        "value": -0.074
+					    }, {
+					        "year": "1960",
+					        "value": -0.124
+					    }, {
+					        "year": "1961",
+					        "value": -0.024
+					    }, {
+					        "year": "1962",
+					        "value": -0.022
+					    }, {
+					        "year": "1963",
+					        "value": 0
+					    }, {
+					        "year": "1964",
+					        "value": -0.296
+					    }, {
+					        "year": "1965",
+					        "value": -0.217
+					    }, {
+					        "year": "1966",
+					        "value": -0.147
+					    }, {
+					        "year": "1967",
+					        "value": -0.15
+					    }, {
+					        "year": "1968",
+					        "value": -0.16
+					    }, {
+					        "year": "1969",
+					        "value": -0.011
+					    }, {
+					        "year": "1970",
+					        "value": -0.068
+					    }, {
+					        "year": "1971",
+					        "value": -0.19
+					    }, {
+					        "year": "1972",
+					        "value": -0.056
+					    }, {
+					        "year": "1973",
+					        "value": 0.077
+					    }, {
+					        "year": "1974",
+					        "value": -0.213
+					    }, {
+					        "year": "1975",
+					        "value": -0.17
+					    }, {
+					        "year": "1976",
+					        "value": -0.254
+					    }, {
+					        "year": "1977",
+					        "value": 0.019
+					    }, {
+					        "year": "1978",
+					        "value": -0.063
+					    }, {
+					        "year": "1979",
+					        "value": 0.05
+					    }, {
+					        "year": "1980",
+					        "value": 0.077
+					    }, {
+					        "year": "1981",
+					        "value": 0.12
+					    }, {
+					        "year": "1982",
+					        "value": 0.011
+					    }, {
+					        "year": "1983",
+					        "value": 0.177
+					    }, {
+					        "year": "1984",
+					        "value": -0.021
+					    }, {
+					        "year": "1985",
+					        "value": -0.037
+					    }, {
+					        "year": "1986",
+					        "value": 0.03
+					    }, {
+					        "year": "1987",
+					        "value": 0.179
+					    }, {
+					        "year": "1988",
+					        "value": 0.18
+					    }, {
+					        "year": "1989",
+					        "value": 0.104
+					    }, {
+					        "year": "1990",
+					        "value": 0.255
+					    }, {
+					        "year": "1991",
+					        "value": 0.21
+					    }, {
+					        "year": "1992",
+					        "value": 0.065
+					    }, {
+					        "year": "1993",
+					        "value": 0.11
+					    }, {
+					        "year": "1994",
+					        "value": 0.172
+					    }, {
+					        "year": "1995",
+					        "value": 0.269
+					    }, {
+					        "year": "1996",
+					        "value": 0.141
+					    }, {
+					        "year": "1997",
+					        "value": 0.353
+					    }, {
+					        "year": "1998",
+					        "value": 0.548
+					    }, {
+					        "year": "1999",
+					        "value": 0.298
+					    }, {
+					        "year": "2000",
+					        "value": 0.267
+					    }, {
+					        "year": "2001",
+					        "value": 0.411
+					    }, {
+					        "year": "2002",
+					        "value": 0.462
+					    }, {
+					        "year": "2003",
+					        "value": 0.47
+					    }, {
+					        "year": "2004",
+					        "value": 0.445
+					    }, {
+					        "year": "2005",
+					        "value": 0.47
+					    }]
+	}
+
+	$scope.lineWithChangingColor = {
+		title 	 	: 'Line Changing Color',
+		valuefield  : 'duration',
+		categoryfield : 'date',
+		linecolor 	: 'lineColor',
+		data  	 	: [{
+				        "lineColor": "#b7e021",
+				        "date": "2012-01-01",
+				        "duration": 408
+				    }, {
+				        "date": "2012-01-02",
+				        "duration": 482
+				    }, {
+				        "date": "2012-01-03",
+				        "duration": 562
+				    }, {
+				        "date": "2012-01-04",
+				        "duration": 379
+				    }, {
+				        "lineColor": "#fbd51a",
+				        "date": "2012-01-05",
+				        "duration": 501
+				    }, {
+				        "date": "2012-01-06",
+				        "duration": 443
+				    }, {
+				        "date": "2012-01-07",
+				        "duration": 405
+				    }, {
+				        "date": "2012-01-08",
+				        "duration": 309,
+				        "lineColor": "#2498d2"
+				    }, {
+				        "date": "2012-01-09",
+				        "duration": 287
+				    }, {
+				        "date": "2012-01-10",
+				        "duration": 485
+				    }, {
+				        "date": "2012-01-11",
+				        "duration": 890
+				    }, {
+				        "date": "2012-01-12",
+				        "duration": 810
+				    }]
+	}
+
+});
+
+</script>
+
+</body>
+</html>
